@@ -2,6 +2,12 @@
 
 Una línea de tiempo interactiva y visualmente atractiva que muestra los hitos más importantes en la historia del Internet.
 
+<div>
+    <center>
+        <img src = https://github.com/alexiadaniela7/LineaTiempoInternet/blob/main/imagen.png" width=500 height="600">
+    </center>
+</div>
+
 
 ## ✨ Características
 
