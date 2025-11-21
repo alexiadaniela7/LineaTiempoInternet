@@ -2,7 +2,6 @@
 
 Una línea de tiempo interactiva y visualmente atractiva que muestra los hitos más importantes en la historia del Internet.
 
-![Vista previa de la línea de tiempo](https://via.placeholder.com/800x400/5cb85c/ffffff?text=Historia+del+Internet)
 
 ## ✨ Características
 
