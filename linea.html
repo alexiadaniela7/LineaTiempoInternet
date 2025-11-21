@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Línea de Tiempo</title>
+    <style>
+        /* CSS Básico y Sencillo */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f9;
+            color: #333;
+            text-align: center;
+        }
+
+        h1 {
+            color: #007bff;
+            margin-bottom: 40px;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        /* Línea central */
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: #5cb85c; /* Verde amigable */
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+        }
+
+        .container {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 40%;
+            margin-bottom: 20px;
+        }
+
+        /* Puntos en la línea */
+        .container::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            right: -17px;
+            background-color: white;
+            border: 4px solid #5cb85c;
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        /* Contenedores a la izquierda */
+        .left {
+            left: 0;
+        }
+
+        /* Contenedores a la derecha */
+        .right {
+            left: 50%;
+        }
+
+        /* Flecha a la derecha para contenedores de la izquierda */
+        .left::before {
+            content: " ";
+            height: 0;
+            position: absolute;
+            top: 22px;
+            width: 0;
+            z-index: 1;
+            right: 30px;
+            border: medium solid white;
+            border-width: 10px 0 10px 10px;
+            border-color: transparent transparent transparent white;
+        }
+
+        /* Flecha a la izquierda para contenedores de la derecha */
+        .right::before {
+            content: " ";
+            height: 0;
+            position: absolute;
+            top: 22px;
+            width: 0;
+            z-index: 1;
+            left: 30px;
+            border: medium solid white;
+            border-width: 10px 10px 10px 0;
+            border-color: transparent white transparent transparent;
+        }
+
+        /* Fija los puntos del lado derecho */
+        .right::after {
+            left: -17px;
+        }
+
+        .content {
+            padding: 20px 30px;
+            background-color: white;
+            position: relative;
+            border-radius: 6px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            text-align: left;
+        }
+
+        .content h3 {
+            margin-top: 0;
+            color: #007bff;
+        }
+
+        /* Estilo para el año */
+        .year {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #5cb85c;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        /* Media queries para hacerlo responsivo */
+        @media screen and (max-width: 600px) {
+            .timeline::after {
+                left: 31px;
+            }
+
+            .container {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+
+            .container::before {
+                left: 60px;
+                border: medium solid white;
+                border-width: 10px 10px 10px 0;
+                border-color: transparent white transparent transparent;
+            }
+
+            .left::after, .right::after {
+                left: 15px;
+            }
+
+            .right {
+                left: 0%;
+            }
+
+            .right::before {
+                 left: 60px;
+                 border-color: transparent white transparent transparent;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1>🌎 Historia del Internet </h1>
+    <h2>Por: Alexia Daniela Ortiz Hernández</h1>
+    <p>¡Explora los momentos clave que nos llevaron a la red que usamos hoy!</p>
+    <div class="timeline" id="timeline-container">
+        </div>
+
+    <script>
+        // JavaScript para los datos y la lógica
+        const timelineEvents = [
+            { year: "1969", title: "Nace ARPANET", description: "Se conecta la primera red entre universidades en EE. UU. (un proyecto militar). ¡Es el **tatarabuelo** del Internet!" },
+            { year: "1983", title: "Protocolo TCP/IP", description: "ARPANET adopta los protocolos TCP/IP. Esto permite que diferentes redes se comuniquen, creando el concepto de 'Internet' (Red Interconectada)." },
+            { year: "1991", title: "World Wide Web (WWW)", description: "Tim Berners-Lee inventa la World Wide Web y el **HTML**. Esto hace que Internet sea fácil de usar con páginas web, no solo texto." },
+            { year: "1993", title: "Primer Navegador Popular", description: "Aparece **Mosaic**, el primer navegador web fácil de usar con imágenes. Abre Internet al público general, no solo a científicos." },
+            { year: "1998", title: "Nace Google", description: "Se funda Google. Revoluciona la forma en que encontramos información entre millones de páginas web." },
+            { year: "2004", title: "Llega Facebook", description: "Se lanza Facebook. Marca el inicio del boom de las **Redes Sociales** y la 'Web 2.0', donde los usuarios crean el contenido." },
+            { year: "2005", title: "YouTube se lanza", description: "Nace la plataforma de videos más grande del mundo, cambiando la forma en que consumimos y compartimos contenido multimedia." },
+            { year: "Actualidad", title: "Internet Móvil, IA y Más", description: "Hoy en día, Internet es casi indispensable. Usamos smartphones, Wi-Fi, 5G, y nuevas tecnologías como la **Inteligencia Artificial** (IA) están transformando la red." }
+        ];
+
+        const timelineContainer = document.getElementById('timeline-container');
+
+        timelineEvents.forEach((event, index) => {
+            // Determina si el evento va a la izquierda o a la derecha de la línea
+            const positionClass = index % 2 === 0 ? 'left' : 'right';
+
+            const eventHTML = `
+                <div class="container ${positionClass}">
+                    <div class="content">
+                        <span class="year">${event.year}</span>
+                        <h3>${event.title}</h3>
+                        <p>${event.description}</p>
+                    </div>
+                </div>
+            `;
+            timelineContainer.innerHTML += eventHTML;
+        });
+
+    </script>
+
+</body>
+</html>
