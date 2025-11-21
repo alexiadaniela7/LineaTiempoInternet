@@ -4,7 +4,7 @@ Una línea de tiempo interactiva y visualmente atractiva que muestra los hitos m
 
 <div>
     <center>
-        <img src = https://github.com/alexiadaniela7/LineaTiempoInternet/blob/main/imagen.png" width=500 height="600">
+        <img src = "https://github.com/alexiadaniela7/LineaTiempoInternet/blob/main/imagen.png" width=500 height="600">
     </center>
 </div>
 
